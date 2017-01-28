@@ -1,0 +1,56 @@
+﻿@model Policlinica.Models.Lechenie
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Lechenie</legend>
+    <div class="display-label">
+        ФИО пациента : @Html.DisplayFor(model => model.UserProfile.ФИО)
+    </div>
+    <br>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Diagnoz.Диагноз)
+        : @Html.DisplayFor(model => model.Diagnoz.Диагноз)
+    </div>
+    <br>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Рецепт)
+        :
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Рецепт)
+    </div>
+    <br>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Vrem.Дата)
+        : @Html.DisplayFor(model => model.Vrem.Дата)
+    </div>
+    <br>
+
+
+    <div class="display-label">
+        ФИО врача: @Html.DisplayFor(model => model.UserProfile1.ФИО)
+    </div>
+
+
+</fieldset>
+@if (Roles.IsUserInRole(User.Identity.Name, "v"))
+{
+    <p>
+        @Html.ActionLink("Назад", "Index", new { Pac = ViewBag.Pac, VremId = ViewBag.VremId })
+    </p>
+}
+else
+{
+    <p>
+        @Html.ActionLink("Назад", "IndexPac")
+    </p>
+}
+

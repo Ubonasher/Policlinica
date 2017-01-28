@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Policlinica.Models.Vrem>
+
+@{
+    ViewBag.Title = "IndexPac";
+}
+
+<h3>Все заявки</h3>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Дата)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Время)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserProfile1.Отделение)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Статус)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Дата)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Время)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserProfile1.Otdelenie.Название_отделени)
+            </td>
+            @if (item.Статус == "z")
+            {
+                <td>
+                    Забронированна
+                </td>
+            }
+            else
+            {
+                if (item.Статус == "c")
+                {
+                    <td>
+                        Выполнена
+                    </td>
+                }
+            }
+            @if (item.Статус == "z")
+            {
+                <td>
+                    @Html.ActionLink("Отменить", "Otm", new { id = item.Id })
+                </td>
+            }
+
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Назад", "Index", "Pacient",null,null)

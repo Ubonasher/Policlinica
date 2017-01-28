@@ -1,0 +1,50 @@
+﻿@model Policlinica.Models.Vrem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Vrem</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Время)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Время)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserProfile1.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserProfile1.UserName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Статус)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Статус)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Дата)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Дата)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UserProfile.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserProfile.UserName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

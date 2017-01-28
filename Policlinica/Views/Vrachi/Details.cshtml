@@ -1,0 +1,43 @@
+﻿@model Policlinica.Models.UserProfile
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>UserProfile</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ФИО)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ФИО)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ДатаРождения)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ДатаРождения)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Otdelenie.Название_отделени)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Otdelenie.Название_отделени)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) |
+    @Html.ActionLink("Назад", "Index")
+</p>

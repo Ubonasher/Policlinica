@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище BdModelContainer" CdmEntityContainer="BdEntities">
+    <EntitySetMapping Name="Diagnoz">
+      <EntityTypeMapping TypeName="BdModel.Diagnoz">
+        <MappingFragment StoreEntitySet="Diagnoz">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Диагноз" ColumnName="Диагноз" />
+          <ScalarProperty Name="Описание" ColumnName="Описание" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lechenie">
+      <EntityTypeMapping TypeName="BdModel.Lechenie">
+        <MappingFragment StoreEntitySet="Lechenie">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Рецепт" ColumnName="Рецепт" />
+          <ScalarProperty Name="Диагноз" ColumnName="Диагноз" />
+          <ScalarProperty Name="Время" ColumnName="Время" />
+          <ScalarProperty Name="Врач" ColumnName="Врач" />
+          <ScalarProperty Name="Пациент" ColumnName="Пациент" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Otdelenie">
+      <EntityTypeMapping TypeName="BdModel.Otdelenie">
+        <MappingFragment StoreEntitySet="Otdelenie">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Название_отделени" ColumnName="Название отделени" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserProfile">
+      <EntityTypeMapping TypeName="BdModel.UserProfile">
+        <MappingFragment StoreEntitySet="UserProfile">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+          <ScalarProperty Name="ДатаРождения" ColumnName="ДатаРождения" />
+          <ScalarProperty Name="Отделение" ColumnName="Отделение" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Uvedomlenie">
+      <EntityTypeMapping TypeName="BdModel.Uvedomlenie">
+        <MappingFragment StoreEntitySet="Uvedomlenie">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Текст" ColumnName="Текст" />
+          <ScalarProperty Name="Получатель" ColumnName="Получатель" />
+          <ScalarProperty Name="Статус" ColumnName="Статус" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vrem">
+      <EntityTypeMapping TypeName="BdModel.Vrem">
+        <MappingFragment StoreEntitySet="Vrem">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Время" ColumnName="Время" />
+          <ScalarProperty Name="Врач" ColumnName="Врач" />
+          <ScalarProperty Name="Статус" ColumnName="Статус" />
+          <ScalarProperty Name="Дата" ColumnName="Дата" />
+          <ScalarProperty Name="Пациент" ColumnName="Пациент" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

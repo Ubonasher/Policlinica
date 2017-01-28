@@ -1,0 +1,64 @@
+﻿@model Policlinica.Models.RegisterModel
+@{
+    ViewBag.Title = "Регистрация";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Создание новой учетной записи.</h2>
+</hgroup>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Форма регистрации</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ФИО)
+                @Html.TextBoxFor(m => m.ФИО)
+            </li>
+            <li>
+                <fieldset>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Отделение, "Otdelenie1")
+                    </div>
+                    <div class="editor-field">
+                        @Html.DropDownList("Отделение", String.Empty)
+                        @Html.ValidationMessageFor(model => model.Отделение)
+                    </div>
+                </fieldset>
+            </li>
+            <li>
+                <fieldset>
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.ДатаРождения)
+                    </div>
+                    <div class="editor-field">
+                        @Html.EditorFor(model => model.ДатаРождения)
+                        @Html.ValidationMessageFor(model => model.ДатаРождения)
+                    </div>
+                </fieldset>
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </li>
+        </ol>
+        <input type="submit" value="Регистрация" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

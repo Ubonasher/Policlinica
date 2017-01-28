@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Policlinica.Models.Vrem>
+
+@{
+    ViewBag.Title = "IndexAdm";
+}
+
+<h2>IndexAdm</h2>
+ @Html.ActionLink("Назад", "Index", "Admin",null,null)
+<p>
+    @Html.ActionLink("Create New", "Create", "Zaj",null,null)
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Дата)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Время)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Врач)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Статус)
+            &nbsp;&nbsp;
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Пациент)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Дата)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Время)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserProfile1.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Статус)
+        </td>        
+        <td>
+            @Html.DisplayFor(modelItem => item.UserProfile.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit","Zaj", new { id=item.Id },null) |
+            @Html.ActionLink("Delete", "Delete", "Zaj", new { id = item.Id }, null)
+        </td>
+    </tr>
+}
+
+</table>

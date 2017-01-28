@@ -1,0 +1,108 @@
+﻿@model IEnumerable<Policlinica.Models.Diagnoz>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/combobox.css" rel="stylesheet" />
+
+<style>
+    .button {
+        background-color: #d3dce0;
+        border: 1px solid #787878;
+        cursor: pointer;
+        font-size: 1.2em;
+        font-weight: 700;
+        padding: 5px;
+        margin-right: 8px;
+        padding-bottom: 8px;
+        width: auto;
+        text-decoration: none;
+    }
+</style>
+
+
+
+@if (Roles.IsUserInRole(User.Identity.Name, "adm"))
+{
+    <h2>Добаваить новый</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <br>
+    <br>
+    @Html.ActionLink("Назад", "Index", "Admin",null, new { @class = "button" })
+    <br>
+    <br>
+}
+else
+{
+    <br>
+    <br>
+    @Html.ActionLink("Назад", "Create", "Lechenie", new { id = ViewBag.VremId }, new { @class = "button" })
+    <br>
+    <br>
+}
+<h2>Поиск</h2><br>
+
+<form action="/Diagnoz/Details/" method="get">
+    <fieldset>
+        Диагноз: <select id="DiagnozType" name="Id" class="form-control combobox">
+            @foreach (var item in Model)
+            {
+                <option value="@item.Id">@item.Диагноз</option>
+            }
+
+        </select>
+        <input id="DiagnozType" name="vremID" type="hidden" value="@ViewBag.VremId" />
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<input type="submit" value="Найти" />
+
+    </fieldset>
+</form>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Диагноз)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Описание)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Диагноз)
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Описание)
+            </td>
+            @if (Roles.IsUserInRole(User.Identity.Name, "adm"))
+            {
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>}
+            else
+            {
+                <td>
+                    <br>
+                    <br>
+                    <br>
+                </td>
+            }
+
+        </tr>
+    }
+
+</table>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.combobox.js"></script>
+    @Scripts.Render("~/bundles/jqueryval")
+}

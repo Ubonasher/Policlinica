@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Policlinica.Models.Vrem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h3>Поиск заявки пациена по ФИО</h3>
+
+@using (Html.BeginForm("SearchRes", "Zaj", FormMethod.Get))
+{
+    <p>
+        ФИО: @Html.TextBox("SearchString")    <input type="submit" value="Найти" />
+    </p>
+}
+<h3>Все заявки</h3>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Дата)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Время)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserProfile.ФИО)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Дата)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Время)
+            </td>
+            <td>
+                @Html.ActionLink(item.UserProfile.ФИО, "Create", "Lechenie", new { id = item.Id }, null)
+            </td>
+
+        </tr>
+    }
+
+</table>

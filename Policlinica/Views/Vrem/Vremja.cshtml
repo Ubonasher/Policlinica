@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Policlinica.Models.Vrem>
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Выберете время</h2>
+
+<table>
+    @foreach (var item in ViewBag.listV)
+    {
+        <tr>
+            <td>
+                @item.ToString()
+                
+                &nbsp;
+                @Html.ActionLink("выбрать", "FinalBron", "Vrem", new { v = item, d = ViewBag.d, idO = ViewBag.idO }, null)
+
+            </td>
+        </tr>
+    }
+</table>

@@ -1,0 +1,64 @@
+﻿@model Policlinica.Models.UserProfile
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>UserProfile</legend>
+
+        @Html.HiddenFor(model => model.UserId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ФИО)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ФИО)
+            @Html.ValidationMessageFor(model => model.ФИО)
+        </div>
+
+        <fieldset>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ДатаРождения)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ДатаРождения)
+                @Html.ValidationMessageFor(model => model.ДатаРождения)
+            </div>
+        </fieldset>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Отделение, "Otdelenie1")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("Отделение", String.Empty)
+            @Html.ValidationMessageFor(model => model.Отделение)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

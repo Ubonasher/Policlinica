@@ -1,0 +1,48 @@
+﻿@model Policlinica.Models.UserProfile
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>UserProfile</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.UserName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ФИО)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ФИО)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.ДатаРождения)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ДатаРождения)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Otdelenie.Название_отделени)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Otdelenie.Название_отделени)
+    </div>
+</fieldset>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Назад", "Index")
+    </p>
+}

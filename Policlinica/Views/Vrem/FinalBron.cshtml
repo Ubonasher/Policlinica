@@ -1,0 +1,21 @@
+﻿@model Policlinica.Models.Vrem
+
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Заявка успешно подана</h2>
+
+<p>
+    Число:
+    @Html.DisplayFor(m => m.Дата)
+</p>
+<p>
+    Время:
+    @Html.DisplayFor(m => m.Время)
+</p>
+<p>
+    Врач:
+    @Html.DisplayFor(m => m.UserProfile1.ФИО)
+</p>

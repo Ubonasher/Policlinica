@@ -1,0 +1,44 @@
+﻿@model Policlinica.Models.Diagnoz
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Diagnoz</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Диагноз)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Диагноз)
+            @Html.ValidationMessageFor(model => model.Диагноз)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Описание)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Описание)
+            @Html.ValidationMessageFor(model => model.Описание)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Назад", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

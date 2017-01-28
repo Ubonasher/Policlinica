@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Policlinica.Models.UserProfile>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+</p>
+@Html.ActionLink("Назад", "Index", "Admin", null, new { @class = "button" })
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName) &nbsp;&nbsp;&nbsp;
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ФИО) &nbsp;&nbsp;&nbsp;
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ДатаРождения) &nbsp;&nbsp;&nbsp;
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Otdelenie.Название_отделени) &nbsp;&nbsp;&nbsp;
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (Roles.IsUserInRole(item.UserName, "v"))
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ФИО)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ДатаРождения)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Otdelenie.Название_отделени)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.UserId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

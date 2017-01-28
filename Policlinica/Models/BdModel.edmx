@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище BdModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Diagnoz">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Диагноз" Type="nchar" MaxLength="255" />
+          <Property Name="Описание" Type="nchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="Lechenie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Рецепт" Type="nchar" MaxLength="300" />
+          <Property Name="Диагноз" Type="int" />
+          <Property Name="Время" Type="int" />
+          <Property Name="Врач" Type="int" />
+          <Property Name="Пациент" Type="int" />
+        </EntityType>
+        <EntityType Name="Otdelenie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название отделени" Type="nchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="ФИО" Type="nvarchar" MaxLength="300" />
+          <Property Name="ДатаРождения" Type="date" />
+          <Property Name="Отделение" Type="int" />
+        </EntityType>
+        <EntityType Name="Uvedomlenie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Текст" Type="nchar" MaxLength="500" />
+          <Property Name="Получатель" Type="int" />
+          <Property Name="Статус" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Vrem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Время" Type="time" Precision="7" />
+          <Property Name="Врач" Type="int" />
+          <Property Name="Статус" Type="nchar" MaxLength="30" />
+          <Property Name="Дата" Type="date" />
+          <Property Name="Пациент" Type="int" />
+        </EntityType>
+        <Association Name="thiskey10">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Lechenie" Type="Self.Lechenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Lechenie">
+              <PropertyRef Name="Пациент" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey11">
+          <End Role="Vrem" Type="Self.Vrem" Multiplicity="0..1" />
+          <End Role="Lechenie" Type="Self.Lechenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lechenie">
+              <PropertyRef Name="Время" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey12">
+          <End Role="Diagnoz" Type="Self.Diagnoz" Multiplicity="0..1" />
+          <End Role="Lechenie" Type="Self.Lechenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoz">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lechenie">
+              <PropertyRef Name="Диагноз" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey16">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Uvedomlenie" Type="Self.Uvedomlenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Uvedomlenie">
+              <PropertyRef Name="Получатель" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey20">
+          <End Role="Otdelenie" Type="Self.Otdelenie" Multiplicity="0..1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otdelenie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="Отделение" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey21">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Vrem" Type="Self.Vrem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Vrem">
+              <PropertyRef Name="Пациент" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey5">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Vrem" Type="Self.Vrem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Vrem">
+              <PropertyRef Name="Врач" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey9">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Lechenie" Type="Self.Lechenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Lechenie">
+              <PropertyRef Name="Врач" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище BdModelContainer">
+          <EntitySet Name="Diagnoz" EntityType="Self.Diagnoz" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lechenie" EntityType="Self.Lechenie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Otdelenie" EntityType="Self.Otdelenie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uvedomlenie" EntityType="Self.Uvedomlenie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vrem" EntityType="Self.Vrem" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="thiskey10" Association="Self.thiskey10">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Lechenie" EntitySet="Lechenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey11" Association="Self.thiskey11">
+            <End Role="Vrem" EntitySet="Vrem" />
+            <End Role="Lechenie" EntitySet="Lechenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey12" Association="Self.thiskey12">
+            <End Role="Diagnoz" EntitySet="Diagnoz" />
+            <End Role="Lechenie" EntitySet="Lechenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey16" Association="Self.thiskey16">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Uvedomlenie" EntitySet="Uvedomlenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey20" Association="Self.thiskey20">
+            <End Role="Otdelenie" EntitySet="Otdelenie" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey21" Association="Self.thiskey21">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Vrem" EntitySet="Vrem" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey5" Association="Self.thiskey5">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Vrem" EntitySet="Vrem" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey9" Association="Self.thiskey9">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Lechenie" EntitySet="Lechenie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BdModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Diagnoz">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Диагноз" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="2000" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Lechenie" Relationship="Self.thiskey12" FromRole="Diagnoz" ToRole="Lechenie" />
+        </EntityType>
+        <EntityType Name="Lechenie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Рецепт" Type="String" MaxLength="300" FixedLength="true" Unicode="true" />
+          <Property Name="Диагноз" Type="Int32" />
+          <Property Name="Время" Type="Int32" />
+          <Property Name="Врач" Type="Int32" />
+          <Property Name="Пациент" Type="Int32" />
+          <NavigationProperty Name="Diagnoz" Relationship="Self.thiskey12" FromRole="Lechenie" ToRole="Diagnoz" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.thiskey10" FromRole="Lechenie" ToRole="UserProfile" />
+          <NavigationProperty Name="Vrem" Relationship="Self.thiskey11" FromRole="Lechenie" ToRole="Vrem" />
+          <NavigationProperty Name="UserProfile1" Relationship="Self.thiskey9" FromRole="Lechenie" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Otdelenie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название_отделени" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.thiskey20" FromRole="Otdelenie" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ФИО" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="ДатаРождения" Type="DateTime" Precision="0" />
+          <Property Name="Отделение" Type="Int32" />
+          <NavigationProperty Name="Lechenie" Relationship="Self.thiskey10" FromRole="UserProfile" ToRole="Lechenie" />
+          <NavigationProperty Name="Lechenie1" Relationship="Self.thiskey9" FromRole="UserProfile" ToRole="Lechenie" />
+          <NavigationProperty Name="Otdelenie" Relationship="Self.thiskey20" FromRole="UserProfile" ToRole="Otdelenie" />
+          <NavigationProperty Name="Uvedomlenie" Relationship="Self.thiskey16" FromRole="UserProfile" ToRole="Uvedomlenie" />
+          <NavigationProperty Name="Vrem" Relationship="Self.thiskey21" FromRole="UserProfile" ToRole="Vrem" />
+          <NavigationProperty Name="Vrem1" Relationship="Self.thiskey5" FromRole="UserProfile" ToRole="Vrem" />
+        </EntityType>
+        <EntityType Name="Uvedomlenie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Текст" Type="String" MaxLength="500" FixedLength="true" Unicode="true" />
+          <Property Name="Получатель" Type="Int32" />
+          <Property Name="Статус" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.thiskey16" FromRole="Uvedomlenie" ToRole="UserProfile" />
+        </EntityType>
+        <EntityType Name="Vrem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Время" Type="Time" Precision="7" />
+          <Property Name="Врач" Type="Int32" />
+          <Property Name="Статус" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="Дата" Type="DateTime" Precision="0" />
+          <Property Name="Пациент" Type="Int32" />
+          <NavigationProperty Name="Lechenie" Relationship="Self.thiskey11" FromRole="Vrem" ToRole="Lechenie" />
+          <NavigationProperty Name="UserProfile" Relationship="Self.thiskey21" FromRole="Vrem" ToRole="UserProfile" />
+          <NavigationProperty Name="UserProfile1" Relationship="Self.thiskey5" FromRole="Vrem" ToRole="UserProfile" />
+        </EntityType>
+        <Association Name="thiskey12">
+          <End Role="Diagnoz" Type="Self.Diagnoz" Multiplicity="0..1" />
+          <End Role="Lechenie" Type="Self.Lechenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Diagnoz">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lechenie">
+              <PropertyRef Name="Диагноз" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey10">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Lechenie" Type="Self.Lechenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Lechenie">
+              <PropertyRef Name="Пациент" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey11">
+          <End Role="Vrem" Type="Self.Vrem" Multiplicity="0..1" />
+          <End Role="Lechenie" Type="Self.Lechenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vrem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lechenie">
+              <PropertyRef Name="Время" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey9">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Lechenie" Type="Self.Lechenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Lechenie">
+              <PropertyRef Name="Врач" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey20">
+          <End Role="Otdelenie" Type="Self.Otdelenie" Multiplicity="0..1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Otdelenie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="Отделение" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey16">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Uvedomlenie" Type="Self.Uvedomlenie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Uvedomlenie">
+              <PropertyRef Name="Получатель" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey21">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Vrem" Type="Self.Vrem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Vrem">
+              <PropertyRef Name="Пациент" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="thiskey5">
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="0..1" />
+          <End Role="Vrem" Type="Self.Vrem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Vrem">
+              <PropertyRef Name="Врач" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BdEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Diagnoz" EntityType="Self.Diagnoz" />
+          <EntitySet Name="Lechenie" EntityType="Self.Lechenie" />
+          <EntitySet Name="Otdelenie" EntityType="Self.Otdelenie" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
+          <EntitySet Name="Uvedomlenie" EntityType="Self.Uvedomlenie" />
+          <EntitySet Name="Vrem" EntityType="Self.Vrem" />
+          <AssociationSet Name="thiskey12" Association="Self.thiskey12">
+            <End Role="Diagnoz" EntitySet="Diagnoz" />
+            <End Role="Lechenie" EntitySet="Lechenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey10" Association="Self.thiskey10">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Lechenie" EntitySet="Lechenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey11" Association="Self.thiskey11">
+            <End Role="Vrem" EntitySet="Vrem" />
+            <End Role="Lechenie" EntitySet="Lechenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey9" Association="Self.thiskey9">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Lechenie" EntitySet="Lechenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey20" Association="Self.thiskey20">
+            <End Role="Otdelenie" EntitySet="Otdelenie" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey16" Association="Self.thiskey16">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Uvedomlenie" EntitySet="Uvedomlenie" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey21" Association="Self.thiskey21">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Vrem" EntitySet="Vrem" />
+          </AssociationSet>
+          <AssociationSet Name="thiskey5" Association="Self.thiskey5">
+            <End Role="UserProfile" EntitySet="UserProfile" />
+            <End Role="Vrem" EntitySet="Vrem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BdModelContainer" CdmEntityContainer="BdEntities">
+          <EntitySetMapping Name="Diagnoz">
+            <EntityTypeMapping TypeName="BdModel.Diagnoz">
+              <MappingFragment StoreEntitySet="Diagnoz">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Диагноз" ColumnName="Диагноз" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lechenie">
+            <EntityTypeMapping TypeName="BdModel.Lechenie">
+              <MappingFragment StoreEntitySet="Lechenie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Рецепт" ColumnName="Рецепт" />
+                <ScalarProperty Name="Диагноз" ColumnName="Диагноз" />
+                <ScalarProperty Name="Время" ColumnName="Время" />
+                <ScalarProperty Name="Врач" ColumnName="Врач" />
+                <ScalarProperty Name="Пациент" ColumnName="Пациент" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Otdelenie">
+            <EntityTypeMapping TypeName="BdModel.Otdelenie">
+              <MappingFragment StoreEntitySet="Otdelenie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Название_отделени" ColumnName="Название отделени" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfile">
+            <EntityTypeMapping TypeName="BdModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="ДатаРождения" ColumnName="ДатаРождения" />
+                <ScalarProperty Name="Отделение" ColumnName="Отделение" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uvedomlenie">
+            <EntityTypeMapping TypeName="BdModel.Uvedomlenie">
+              <MappingFragment StoreEntitySet="Uvedomlenie">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Текст" ColumnName="Текст" />
+                <ScalarProperty Name="Получатель" ColumnName="Получатель" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vrem">
+            <EntityTypeMapping TypeName="BdModel.Vrem">
+              <MappingFragment StoreEntitySet="Vrem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Время" ColumnName="Время" />
+                <ScalarProperty Name="Врач" ColumnName="Врач" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Пациент" ColumnName="Пациент" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
